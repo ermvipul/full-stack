@@ -20,10 +20,18 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Build and push image (replace with your image name)
+      - name: Build and push go-app image 
         uses: docker/build-push-action@v5  # Uses the official Docker build and push action
         with:
           push: true
           tags: v1pul02/go-app:latest
           # Specify the working directory containing the Dockerfile
           file: ../../Dockerfile-go
+      
+      - name: Build and push nextjs-app image 
+        uses: docker/build-push-action@v5  # Uses the official Docker build and push action
+        with:
+          push: true
+          tags: v1pul02/go-app:latest
+          # Specify the working directory containing the Dockerfile
+          file: ../../Dockerfile-next
