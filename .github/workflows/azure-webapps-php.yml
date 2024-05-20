@@ -20,10 +20,10 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
-      - name: Navigate to folder and build image
-        run: |
-          cd ../docker-gs-ping  # Replace with your folder name
-          docker build -t v1pul02/go-app:latest .
-
-      - name: Push image
-        run: docker push v1pul02/go-app:latest
+      - name: Build and push image (replace with your image name)
+        uses: docker/build-push-action@v5  # Uses the official Docker build and push action
+        with:
+          push: true
+          tags: v1pul02/go-app:latest
+          # Specify the working directory containing the Dockerfile
+          working-directory: docker-gs-ping
