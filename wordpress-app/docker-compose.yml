@@ -17,7 +17,10 @@ services:
       - assignment
 
   wordpress:
-    image: wordpress:latest
+    #image: wordpress:latest
+    build:
+      context: .  # Replace with the path to your directory containing the Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 80:80
     restart: always
