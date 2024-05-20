@@ -41,3 +41,55 @@ jobs:
           push: true
           tags: v1pul02/wordpress-app:latest
           file: ../../wordpress-app/Dockerfile
+    
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            sudo docker stop go-app >> /dev/null
+            sudo docker rm go-app >> /dev/null
+            sudo docker pull v1pul02/go-app:latest
+            sudo docker image prune -f
+            sudo docker run -d --network assignment -p 1190:1190 --name go-app v1pul02/go-app:latest
+      
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            sudo docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+            sudo docker stop nextjs-app >> /dev/null
+            sudo docker rm nextjs-app >> /dev/null
+            sudo docker pull v1pul02/nextjs-app:latest
+            sudo docker image prune -f
+            sudo docker run -d --network assignment -p 3000:3000 --name nextjs-app v1pul02/nextjs-app:latest
+
+      - name: Upload folder to server
+        uses: appleboy/scp-action@master  # Action for SSH file transfer
+        with:
+          host: ${{ secrets.HOST }}  # Replace with server hostname
+          username: ${{ secrets.USERNAME }}  # Replace with server username
+          key: ${{ secrets.KEY }}  # Replace with server password (consider using SSH key for better security)
+          port: ${{ secrets.PORT }}
+          source: "../../wordpress-app"  # Replace with the path to the folder you want to copy
+          target: "/home/vipul/wordpress"  # Replace with the destination folder on the server (including tilde ~ for home directory)
+          recursive: true  # Set to true to copy the entire folder structure
+      
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            cd /home/vipul/wordpress
+            sudo docker compose up --build
