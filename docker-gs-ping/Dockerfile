@@ -6,14 +6,12 @@ FROM golang:1.19
 WORKDIR /app
 
 # Download Go modules
-COPY mod sum.txt ./
-RUN mv ./mod ./go.mod
-RUN mv ./sum.txt ./go.sum
+COPY ./docker-gs-ping/go.mod ./docker-gs-ping/go.sum ./
 RUN go mod download
 
 # Copy the source code. Note the slash at the end, as explained in
 # https://docs.docker.com/engine/reference/builder/#copy
-COPY *.go ./
+COPY ./docker-gs-ping/*.go ./
 
 # Build
 RUN CGO_ENABLED=0 GOOS=linux go build -o /docker-gs-ping
