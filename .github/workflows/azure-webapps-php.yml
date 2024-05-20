@@ -1,3 +1,11 @@
+name: Build and Push Docker Images (corrected)
+
+# This workflow runs on push events to the main branch
+on:
+  push:
+    branches: [ main ]
+
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
