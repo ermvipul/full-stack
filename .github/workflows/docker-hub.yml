@@ -33,7 +33,7 @@ jobs:
         with:
           push: true
           tags: v1pul02/go-app:latest
-          file: ../../docker-nextjs-app/Dockerfile
+          file: ../../Dockerfile-next
 
       - name: Build and push wordpress-app image 
         uses: docker/build-push-action@v5  # Uses the official Docker build and push action
