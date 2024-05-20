@@ -26,20 +26,18 @@ jobs:
           push: true
           tags: v1pul02/go-app:latest
           # Specify the working directory containing the Dockerfile
-          file: ../../Dockerfile-go
+          file: ../../docker-gs-ping/Dockerfile
       
       - name: Build and push nextjs-app image 
         uses: docker/build-push-action@v5  # Uses the official Docker build and push action
         with:
           push: true
           tags: v1pul02/go-app:latest
-          # Specify the working directory containing the Dockerfile
-          file: ../../Dockerfile-next
+          file: ../../docker-nextjs-app/Dockerfile
 
       - name: Build and push wordpress-app image 
         uses: docker/build-push-action@v5  # Uses the official Docker build and push action
         with:
           push: true
           tags: v1pul02/wordpress-app:latest
-          # Specify the working directory containing the Dockerfile
           file: ../../wordpress-app/Dockerfile
