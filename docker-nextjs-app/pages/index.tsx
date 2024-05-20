@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
+
+//////////////////////* uncomment below code to use api that gives an hello message to next js frontend  */////////////////////////////////////////////////////
+
 // const Home = () => {
 //   const [message, setMessage] = useState('')
 //   const [error, setError] = useState<string>('')
@@ -33,6 +36,8 @@ import axios from 'axios'
 // export default Home
 // pages/index.tsx
 
+
+//////////////////////* uncomment below code to use api that reads wordpress post info using wordpress api's & gives reponse to the nextjs frontend */////////////////////////////////////////////////////
 interface Post {
   id: number;
   title: {
