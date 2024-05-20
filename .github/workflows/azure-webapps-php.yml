@@ -42,4 +42,4 @@ jobs:
           push: true
           tags: v1pul02/wordpress-app:latest
           # Specify the working directory containing the Dockerfile
-          working-directory: ../../wordpress-app/
+          file: ../../wordpress-app/Dockerfile
