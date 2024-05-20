@@ -14,7 +14,7 @@ jobs:
 
       - name: Navigate to folder and build image
         run: |
-          cd your-folder-name  # Replace with your folder name
+          cd ../docker-gs-ping  # Replace with your folder name
           docker build -t v1pul02/go-app:latest .
 
       - name: Push image
